@@ -6,7 +6,13 @@ const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, "db.json"));
 const middlewares = jsonServer.defaults();
 
-app.use(cors()).options("*", cors());
+server.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type, Access-Control-Allow-Origin, Authorization",
+  })
+);
 
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
